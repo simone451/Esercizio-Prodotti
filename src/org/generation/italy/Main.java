@@ -62,25 +62,42 @@ public class Main {
 		prodotti.put(5, "mortadella");
 
 		int codiceProdotto;
+		float totale = 0;
 		float quantita, prezzo;
 		String risposta;
 
 		do {
-			System.out.println("inserisci codice prodotto");
-			codiceProdotto = Integer.parseInt(sc.nextLine());
+		    // Acquisisci il nome del prodotto
+		    System.out.println("inserisci il codice del prodotto");
+		    codiceProdotto = Integer.parseInt(sc.nextLine());
 
-			prezzo = prezzi.get(codiceProdotto);
-			if (prezzo != -1) {
-				System.out.println("inserisci quantita");
-				quantita = Float.parseFloat(sc.nextLine());
-				prezzo = quantita * prezzo;
-				System.out.println("il prezzo e: " + prezzo);
-			} else {
-				System.out.println("prodotto non disponibile");
-			}
+		    // Acquisisci il prezzo dal mappa
+		    prezzo = prezzi.get(codiceProdotto);
 
-			System.out.println("vuoi continuare? (sì/no)");
-			risposta = sc.nextLine().toLowerCase();
+		    // Se il prezzo è nullo, il prodotto non è disponibile
+		    if (prezzo != -1) {
+		        // Acquisisci la quantità
+		        System.out.println("inserisci quantita");
+		        quantita = Float.parseFloat(sc.nextLine());
+
+		        // Calcola il prezzo totale
+		        prezzo = quantita * prezzo;
+
+		        // Aggiorna il totale
+		        totale += prezzo;
+
+		        // Stampa il prezzo totale
+		        System.out.println("il prezzo e: " + prezzo);
+		    } else {
+		        System.out.println("prodotto non disponibile");
+		    }
+
+		    // Acquisisci la risposta all'input
+		    System.out.println("vuoi continuare? (sì/no)");
+		    risposta = sc.nextLine().toLowerCase();
 		} while (risposta.equals("sì"));
+
+		// Stampa il totale
+		System.out.println("il totale e: " + totale);
 	}
 }
