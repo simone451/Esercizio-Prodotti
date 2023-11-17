@@ -41,52 +41,46 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-        HashMap<Integer, Float> prezzi = new HashMap<>();
-        HashMap<Integer, String> prodotti = new HashMap<>();
+		HashMap<Integer, Float> prezzi = new HashMap<>();
+		HashMap<Integer, String> prodotti = new HashMap<>();
 
-        // Inizializza la mappa dei prezzi direttamente
-        prezzi = new HashMap<Integer, Float>() { private static final long serialVersionUID = 1L;
+		// Inizializza la mappa dei prezzi direttamente
+		prezzi = new HashMap<Integer, Float>() { private static final long serialVersionUID = 1L;
 		{
-            put(1, 4.0f);
-            put(2, 1.60f);
-            put(3, 3.75f);
-            put(4, 12.50f);
-            put(5, 11.0f);
-        }};
+			put(1, 4.0f);
+			put(2, 1.60f);
+			put(3, 3.75f);
+			put(4, 12.50f);
+			put(5, 11.0f);
+		}};
 
-        // Inizializza la mappa dei prodotti in modo tradizionale
-        prodotti.put(1, "pane");
-        prodotti.put(2, "pasta barilla");
-        prodotti.put(3, "biscotti");
-        prodotti.put(4, "pasta divella");
-        prodotti.put(5, "mortadella");
+		// Inizializza la mappa dei prodotti in modo tradizionale
+		prodotti.put(1, "pane");
+		prodotti.put(2, "pasta barilla");
+		prodotti.put(3, "biscotti");
+		prodotti.put(4, "pasta divella");
+		prodotti.put(5, "mortadella");
 
-        int codiceProdotto;
-        float quantita, prezzo;
-        String risposta;
+		int codiceProdotto;
+		float quantita, prezzo;
+		String risposta;
 
 		do {
-			System.out.println("inserisci nome prodotto");
-			nomeProdotto = sc.nextLine();
-			posizione = -1;
+			System.out.println("inserisci codice prodotto");
+			codiceProdotto = Integer.parseInt(sc.nextLine());
 
-			for(i=0; i<=4; i++) {
-				if(nomeProdotto.equals(prodotti[i])) {
-					posizione = i;
-				}
-			}
-			if (posizione != -1) {
+			prezzo = prezzi.get(codiceProdotto);
+			if (prezzo != -1) {
 				System.out.println("inserisci quantita");
 				quantita = Float.parseFloat(sc.nextLine());
-				prezzo = quantita*prezzi[posizione];
+				prezzo = quantita * prezzo;
 				System.out.println("il prezzo e: " + prezzo);
 			} else {
 				System.out.println("prodotto non disponibile");
 			}
+
 			System.out.println("vuoi continuare? (sì/no)");
-			risposta = sc.nextLine();
-		} while(risposta.equals("sì"));
+			risposta = sc.nextLine().toLowerCase();
+		} while (risposta.equals("sì"));
 	}
 }
-
-
